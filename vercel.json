@@ -1,7 +1,7 @@
 {
     "buildCommand": "cd reme ; npm install ; npm run build",
-    "output": "reme/dist",
     "framework": "vite",
+    "outputDirectory": "reme/dist",
     "rewrites": [
         {
             "source": "/server/(.*)",
