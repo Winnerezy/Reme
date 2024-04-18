@@ -16,8 +16,7 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 const PORT = process.env.PORT || 6000;
 
-const URI =
-  "mongodb+srv://Winner:c2f38KCU2a1GhUPy@reme.vjgka3z.mongodb.net/Reme?retryWrites=true&w=majority&appName=Reme";
+const URI = process.env.MONGO_URL
 
 connect();
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
