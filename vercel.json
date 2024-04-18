@@ -1,0 +1,11 @@
+{
+    "buildCommand": "cd reme ; npm install ; npm run build",
+    "output": "reme/dist",
+    "framework": "vite",
+    "rewrites": [
+        {
+            "source": "/server/(.*)",
+            "destination": "/server/server.js"
+        }
+    ]
+} 
