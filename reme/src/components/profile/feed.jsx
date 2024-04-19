@@ -40,9 +40,9 @@ const { hrStyles } = Style()
         return <IsLoading/>
     }
     return(
-        <main>
-            <hr className='border-b-1w-full mt-8' style={hrStyles}/>
-            <section className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-8 mt-8 items-center justify-center">
+        <main className="flex flex-col items-center justify-center px-4 w-full">
+            <hr className='border-b-1 w-full mt-8' style={hrStyles}/>
+            <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-60 gap-y-8 mt-8 items-center justify-evenly">
                 {posts.length > 0 ? posts.map((post, index) => (<ProfilePostCard key={index} {...post}/>)) : <div>No Posts</div>}
             </section>
         </main>

@@ -7,7 +7,7 @@ export default function LeftBar(){
         
         return(
         <Link to={bar.link} key={index} className="hidden ml-4 mt-8 sm:flex gap-2 items-center hover:bg-slate-200 w-fit p-2 rounded-md">
-            <img src={bar.icon} alt={bar.label} className="w-6 h-6"/>
+            {<img src={bar.icon} alt={bar.label} className="w-6 h-6"/>}
             <p className="text-sm font-semibold tracking-wide">{bar.label}</p>
         </Link>
         ) 

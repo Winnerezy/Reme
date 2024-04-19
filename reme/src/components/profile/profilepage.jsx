@@ -113,7 +113,7 @@ export default function Profile(){
                 <section className="flex gap-x-4">
                 <img src={userData.profilePicture ? userData.profilePicture.data : "/public/avatar.png"} className="md:w-24 sm:h-24 w-16 h-16 rounded-full"/>
                 <section className="flex flex-col gap-y-2 justify-center items-start">
-                <h4 className=" tracking-wide sm:text-2xl text-md text-center font-semibold ">{userData.firstName} {userData.lastName}</h4>
+                <p className=" tracking-wide sm:text-2xl md:text-xm text-xs text-center font-semibold ">{userData.firstName} {userData.lastName}</p>
                 <p className="sm:text-base text-xs font-light hover:text-gray-400">@{userName}</p>
                 </section>
                 </section>

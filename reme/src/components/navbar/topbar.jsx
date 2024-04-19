@@ -6,7 +6,7 @@ import { ThemeContext } from '../miscellaneous/themecontext';
 import Style from '../miscellaneous/styles';
 export default function TopBar(){
 const navigate = useNavigate()
-const { user } = useContext(TokenContext)
+const { user, setUser } = useContext(TokenContext)
 const [isLoading, setIsLoading] = useState(true);
 const [userData, setUserData] = useState({profilePicture: {data: ''}});
 const { hrStyles } = Style()
@@ -45,6 +45,7 @@ useEffect(()=>{
             await fetch('http://localhost:5000/logout', 
             {method: 'POST', credentials: 'include'})
             localStorage.clear()
+            setUser('')
             navigate('/sign-up') 
         } catch (error) {
             console.error('Error: ', error)
@@ -59,16 +60,15 @@ useEffect(()=>{
         }
         
     }
-   
-
-    console.log(theme)
 
     return(
         <div className='flex flex-col mr-4 ml-4 mt-4'>
         <section className='flex items-center justify-between'>
         <h2 className="font-bold italic tracking-widest text-2xl">Reme</h2>
         <section className='flex gap-3 items-center justify-center'>
-        <button className='w-8 h-8 rounded-full bg-slate-200 shadow-md' onClick={()=> setTheme(prev => !prev)}></button>
+        <button className='drop-shadow-md' onClick={()=> setTheme(prev => !prev)}>
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill={theme ? 'black' : 'white'} style={hrStyles}><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Z"/></svg>
+        </button>
         <div>
         <img src={userData.profilePicture ? userData.profilePicture.data : "/public/avatar.png"} className="w-8 h-8 rounded-full shadow-sm" onClick={handleProfile}/>
     
