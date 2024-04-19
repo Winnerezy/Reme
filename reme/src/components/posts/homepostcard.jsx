@@ -2,11 +2,13 @@ import { useCallback, useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { TokenContext } from '../miscellaneous/tokenContext'
 import Style from '../miscellaneous/styles'
+import { ThemeContext } from '../miscellaneous/themecontext'
 export default function HomePostCard({_id, title, photo, description, author, hearts}){
     const [heart, setHeart] = useState(hearts.length)
     const [click, setClick] = useState(false)
     const { user }  = useContext(TokenContext)
     const { hrStyles } = Style()
+    const { theme } = useContext(ThemeContext)
     useEffect(() =>{ 
         if(hearts.includes(user)){ //if user already liked post click state sets to true
             setClick(true)
@@ -85,7 +87,9 @@ const handleSave = async(photo, title, description, author, hearts) =>{
                 <p>{heart} {heart === 1 ? "heart" : "hearts" }</p>
                 </section>
                 <div>
-                <button onClick={() => handleSave(photo, title, description, author, hearts)}><img src="/public/bookmark.svg" className='w-8 h-8 absolute right-2'/></button>
+                <button onClick={() => handleSave(photo, title, description, author, hearts)}>
+                <svg xmlns="http://www.w3.org/2000/svg" height="36" viewBox="0 -960 960 960" width="36" style={hrStyles} fill={theme ? 'black' : 'white'}><path d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Zm80-122 200-86 200 86v-518H280v518Zm0-518h400-400Z"/></svg>
+                </button>
                 </div>
                 </section>
 

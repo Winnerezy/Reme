@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { TokenContext } from '../miscellaneous/tokenContext';
 import IsLoading from '../miscellaneous/loadingpage';
 import { ThemeContext } from '../miscellaneous/themecontext';
@@ -15,51 +15,53 @@ const handleProfile = () =>{
     navigate(`/profile/${user}`);
 }
 
-useEffect(()=>{
-    async function topBar(){
-            try {
-                const options = {
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                    credentials: 'include'
-                }
-                const res = await fetch(`http://localhost:5000/profile/${user}`, options);
-                if(!res.ok){
-                throw new Error('Connot fetch user data');
-            }
-                const data = await res.json()
-                setUserData(data)
-            } catch (error) {
-                console.error('Error is ', error)
-            } finally {
-                setIsLoading(false)
-            }
-        }
-    topBar()
-}, [user])
-    const logout = async() =>{
+const FetchUserData = useCallback(async()=>{ //cache the user data if the same user remains logged in
         try {
-            await fetch('http://localhost:5000/logout', 
-            {method: 'POST', credentials: 'include'})
-            localStorage.clear()
-            setUser('')
-            navigate('/sign-up') 
+            const options = {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include'
+            }
+            const res = await fetch(`http://localhost:5000/profile/${user}`, options);
+            if(!res.ok){
+            throw new Error('Connot fetch user data');
+        }
+            const data = await res.json()
+            setUserData(data)
         } catch (error) {
-            console.error('Error: ', error)
+            console.error('Error is ', error)
         } finally {
             setIsLoading(false)
         }
+    }, [user])
 
-        if(isLoading){
-            return(
-            <IsLoading/>
-            )
-        }
-        
+useEffect(()=>{
+    FetchUserData()
+}, [FetchUserData]);
+
+const logout = async() =>{
+    try {
+        await fetch('http://localhost:5000/logout', 
+        {method: 'POST', credentials: 'include'})
+        localStorage.clear()
+        setUser('')
+        navigate('/sign-up') 
+    } catch (error) {
+        console.error('Error: ', error)
+    } finally {
+        setIsLoading(false)
     }
+
+    if(isLoading){
+        return(
+        <IsLoading/>
+        )
+    }
+    
+}
 
     return(
         <div className='flex flex-col mr-4 ml-4 mt-4'>
@@ -74,7 +76,7 @@ useEffect(()=>{
     
         </div>
         <button className="flex items-center justify-center w-max p-2 h-6 text-xs hover:drop-shadow-lg" onClick={logout}>
-        <img src="/public/logout.svg" className="w-4"/>
+        <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 -960 960 960" width="18" fill={theme ? 'black' : 'white'} style={hrStyles}><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/></svg>
         </button>
         </section>
         </section>

@@ -38,7 +38,7 @@ export default function SearchPage(){
     return (
         <main className="flex flex-col gap-y-8">
         <header className="flex items-center justify-center gap-x-4">
-        <input type="text" className="w-80 sm:w-100 h-8 rounded-md outline-none shadow-lg border-black border" placeholder="  search here..." ref={searchRef} value={searchValue} onChange={handleSearch}/>
+        <input type="text" className="w-80 sm:w-100 h-8 rounded-md outline-none shadow-lg border-black border text-black" placeholder="  search here..." ref={searchRef} value={searchValue} onChange={handleSearch}/>
        
         </header>
         <section className="flex flex-col gap-y-8 items-center justify-center">

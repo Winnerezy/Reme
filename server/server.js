@@ -84,7 +84,7 @@ app.get("/profile/:userName", async (req, res) => {
     const post = await Posts.find({author: userName}) //getting the posts of the user
     user.posts = post;
     await user.save();
-    const updatedUser = await User.findOne({userName: userName}).populate('posts');
+    const updatedUser = await User.findOne({userName: userName}, {email: false, password: false}).populate('posts');
     return res.status(200).json(updatedUser);
   } catch (error) {
     return res.status(500).json({ message: "Server Error" });
