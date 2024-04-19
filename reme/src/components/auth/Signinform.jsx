@@ -48,7 +48,7 @@ export default function SignInForm(){
     }
 
     return(
-        <main className='flex items-center justify-center relative top-24'>
+        <main className='flex items-center justify-center relative top-20'>
         <form className='bg-none w-max sm:w-100 h-98 backdrop-blur-sm border-2 shadow-lg rounded-xl flex flex-col items-center jusitfy-center text-center gap-y-12 mr-4 ml-4'>
         <h2 className='mt-24 font-bold tracking-wider underline'>Sign In</h2>
 

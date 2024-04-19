@@ -94,7 +94,7 @@ export default function SignUpForm(){
             }
  }
     return(
-        <main className="flex items-center justify-center relative top-24 mr-4 ml-4">
+        <main className="flex items-center justify-center relative top-20 mr-4 ml-4">
         <form className='flex flex-col w-[1000px] flex-shrink md:h-[500px] h-[650px] border-2 shadow-lg rounded-md items-center jusitfy-start text-center gap-y-8 p-8 md:gap-y-16'>
         <h2 className='font-bold underline mt-8 text-3xl'>SIGN UP</h2>
         <section className='flex w-full sm:flex-row flex-col gap-y-8'>

@@ -14,7 +14,7 @@ import App from './App';
 import CreatePosts from './components/posts/createposts';
 import EditPost from './components/posts/editpost';
 import ProfileCard from './components/profile/profilecard';
-import SavedPosts from './components/posts/savedposts';
+import SavedPosts from './components/savedposts/savedposts';
 import { ThemeProvider } from './components/miscellaneous/themecontext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(

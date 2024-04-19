@@ -8,7 +8,7 @@ import multer from "multer";
 import Posts from "./schemas/postSchema.js";
 import dotenv from "dotenv";
 import VerifyToken from "./middleware/verifytoken.js";
-import SavedPosts from "./schemas/savedpostsSchema.js";
+import SavedPost from "./schemas/savedpostsSchema.js";
 dotenv.config({ path: "./.env" });
 
 const app = express();
@@ -463,32 +463,43 @@ app.put("/editpost/:id", upload.single('photo'), VerifyToken, async (req, res) =
   }
 });
 
-/*
 app.post('/savepost', VerifyToken, async(req, res)=> {
     try {
-        const {_id, author, title, hearts, photo, description} = req.body;
-        const saved = await SavedPosts.findOne({author: author});
-        if(saved){
-            return res.status(400).json({message: 'Post already saved'});
+        const { _id } = req.body;
+        const post = await Posts.findById({_id})
+        const existing = await SavedPost.findOne({saved: post})
+        if(existing){
+          return res.status(400).json({ message: 'Post already saved' })
         }
-        const savedPost = new SavedPosts({author, title, hearts, photo, description});
-        await savedPost.save()
+        const savedPost = await SavedPost.create({author: req.username, saved: post});
+        
         return res.status(201).json(savedPost);
-    }
+      }
        catch (error) {
-        return res.status(400).json({message: error.message});
+        return res.status(500).json({message: error.message});
     }
 })
 
+app.delete('/unsavepost', VerifyToken, async(req, res)=> {
+  try {
+      const { _id } = req.body;
+      const unSavedPosts = await SavedPost.deleteOne({saved: _id});
+      return res.status(200).json({ message: 'Deleted Successfully' });
+    }
+     catch (error) {
+      return res.status(400).json({message: error.message});
+  }
+});
+
 app.get('/savedposts', VerifyToken, async(req, res)=> {
     try {
-        const savedPosts = await SavedPosts.find({});
-        return res.status(200).json(savedPosts);
+        const savedPosts = await SavedPost.find({author: req.username}).populate('saved');
+        return res.status(200).json({ data: savedPosts});
     } catch (error) {
         return res.status(500).json({message: error.message});
     }
 })
-*/
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

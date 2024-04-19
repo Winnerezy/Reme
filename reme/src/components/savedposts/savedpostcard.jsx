@@ -65,12 +65,12 @@ const handleSave = async() =>{
     
     return(
         <main>
-            <article className="relative w-80 max-h-96 sm:w-98 sm:max-h-100 rounded-md border-2 shadow-md flex flex-col items-center p-4" style={hrStyles}>
+            <article className="relative w-80 h-96 rounded-md border-2 shadow-md flex flex-col items-center p-4" style={hrStyles}>
                 
-                <section className='flex items-center justify-center w-80 h-80 border-black'>
-                <img src={photo.data} alt={title} className="w-60 h-60 sm:w-80 sm:h-80 object-contain" />
+                <section className='flex items-center justify-center w-80 h-80 border-black relative -top-6'>
+                <img src={photo.data} alt={title} className="w-60 h-60 object-contain" />
                 </section>
-                <section className='w-full flex flex-row items-center relative'>
+                <section className='w-full flex flex-row items-center relative -top-10'>
                 <section className='w-full flex flex-col items-start justify-center'>
                 <div className='flex items-center justify-center'>
                 {click ? <button className='w-12 h-12 bg-transparent' onClick={handleUnHeart}>
@@ -89,7 +89,7 @@ const handleSave = async() =>{
                 </div>
                 </section>
 
-                <div className='w-full flex flex-col'>
+                <div className='w-full flex flex-col relative -top-10'>
                 <section className='flex gap-x-4 items-center justify-start text-sm'>
                 <Link to={`/profile/${author}`} className=' hover:text-gray-900'>@{author}</Link>
                 <p className="font-medium">{title}</p>
