@@ -20,7 +20,7 @@ export default function SearchPage(){
                 if(searchValue === ''){
                     return;
                 }
-                const res = await fetch(`http://localhost:5000/users/${searchValue}`);
+                const res = await fetch(`https://reme-server-2o9o.onrender.com/users/${searchValue}`);
                 if(!res.ok){
                     throw new Error('Error found')
                 }

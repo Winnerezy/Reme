@@ -3,11 +3,11 @@ import {  useParams, useNavigate, Link } from "react-router-dom"
 import { TokenContext } from "../miscellaneous/tokenContext";
 import IsLoading from "../miscellaneous/loadingpage";
 import Feed from "./feed";
-import { ThemeContext } from "../miscellaneous/themecontext";
+//import { ThemeContext } from "../miscellaneous/themecontext";
 import Style from "../miscellaneous/styles";
 export default function Profile(){
-    const { buttonStyles, textStyles } = Style()
-    const { theme } = useContext(ThemeContext)
+    const { buttonStyles, textStyles } = Style();
+    //const { theme } = useContext(ThemeContext)
     const { userName } = useParams();
     const [userData, setUserData] = useState({});
     const [follow, setFollow] = useState(false) //intial follow state is false by default
@@ -26,7 +26,7 @@ export default function Profile(){
                     },
                     credentials: 'include'
                 }
-                const res = await fetch(`http://localhost:5000/profile/${userName}`, options);
+                const res = await fetch(`https://reme-server-2o9o.onrender.com/profile/${userName}`, options);
                 if(!res.ok){
                     throw new Error('Connot fetch user data');
                     
@@ -60,7 +60,7 @@ export default function Profile(){
                 credentials: 'include',
                 body: JSON.stringify({})
             }
-            const res = await fetch(`http://localhost:5000/${userName}/follow`, options);
+            const res = await fetch(`https://reme-server-2o9o.onrender.com/${userName}/follow`, options);
             if(!res.ok){
                throw new Error('Error found')
             }
@@ -84,7 +84,7 @@ export default function Profile(){
                 credentials: 'include',
                 body: JSON.stringify({})
             }
-            const res = await fetch(`http://localhost:5000/${userName}/unfollow`, options);
+            const res = await fetch(`https://reme-server-2o9o.onrender.com/${userName}/unfollow`, options);
             if(!res.ok){
                throw new Error('Error found')
             }

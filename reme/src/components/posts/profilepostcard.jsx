@@ -24,7 +24,7 @@ export default function ProfilePostCard({_id, title, photo, author, description,
             },
             credentials: 'include'
         }
-        const res = await fetch(`http://localhost:5000/heart/${_id}`, options)
+        const res = await fetch(`https://reme-server-2o9o.onrender.com/heart/${_id}`, options)
         const {hearts} = await res.json()
         setHeart(hearts.length)
         setClick(true)
@@ -39,7 +39,7 @@ export default function ProfilePostCard({_id, title, photo, author, description,
         },
         credentials: 'include'
     }
-    const res = await fetch(`http://localhost:5000/unheart/${_id}`, options)
+    const res = await fetch(`https://reme-server-2o9o.onrender.com/unheart/${_id}`, options)
     const { hearts } = await res.json()
     setHeart(hearts.length)
     setClick(false)

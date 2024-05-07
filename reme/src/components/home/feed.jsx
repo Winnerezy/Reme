@@ -18,7 +18,7 @@ const [isLoading, setIsLoading] = useState(true)
                     },
                     credentials: 'include'
                 }
-            const res = await fetch('http://localhost:5000/feed', options)
+            const res = await fetch('https://reme-server-2o9o.onrender.com/feed', options)
             if(!res.ok){
                 throw new Error('error found')
             }

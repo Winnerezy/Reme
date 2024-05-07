@@ -17,7 +17,7 @@ const { hrStyles } = Style()
                     },
                     credentials: 'include'
                 }
-            const res = await fetch(`http://localhost:5000/savedposts`, options)
+            const res = await fetch(`https://reme-server-2o9o.onrender.com/savedposts`, options)
             if(!res.ok){
                 throw new Error('error found')
             }

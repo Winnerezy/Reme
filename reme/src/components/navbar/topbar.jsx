@@ -25,7 +25,7 @@ const FetchUserData = useCallback(async()=>{ //cache the user data if the same u
                 },
                 credentials: 'include'
             }
-            const res = await fetch(`http://localhost:5000/profile/${user}`, options);
+            const res = await fetch(`https://reme-server-2o9o.onrender.com/profile/${user}`, options);
             if(!res.ok){
             throw new Error('Connot fetch user data');
         }
@@ -44,7 +44,7 @@ useEffect(()=>{
 
 const logout = async() =>{
     try {
-        await fetch('http://localhost:5000/logout', 
+        await fetch('https://reme-server-2o9o.onrender.com/logout', 
         {method: 'POST', credentials: 'include'})
         localStorage.clear()
         setUser('')

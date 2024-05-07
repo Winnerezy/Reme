@@ -36,7 +36,7 @@ export default function EditPosts(){
                 credentials: 'include',
                 body: formData
             }
-            const res = await fetch(`http://localhost:5000/editpost/${state._id}`, options)
+            const res = await fetch(`https://reme-server-2o9o.onrender.com/editpost/${state._id}`, options)
             if(!res.ok){
                 throw new Error('Error found')
             }

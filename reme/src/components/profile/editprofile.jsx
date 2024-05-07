@@ -22,7 +22,7 @@ export default function EditProfile(){
                     },
                     credentials: 'include'
                 }
-                const res = await fetch(`http://localhost:5000/profile/${userName}`, options);
+                const res = await fetch(`https://reme-server-2o9o.onrender.com/profile/${userName}`, options);
                 if(!res.ok){
                     throw new Error('Connot fetch user data');
                     
@@ -64,7 +64,7 @@ export default function EditProfile(){
                     body: formData,
                     credentials: 'include',
                 }
-                const res = await fetch(`http://localhost:5000/${userName}/edit`, options)
+                const res = await fetch(`https://reme-server-2o9o.onrender.com/${userName}/edit`, options)
                 if(!res.ok) throw new Error ('Error found')
             
                 navigate(`/profile/${userName}`)    //navigate back to profile when saved

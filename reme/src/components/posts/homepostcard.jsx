@@ -6,11 +6,12 @@ import { ThemeContext } from '../miscellaneous/themecontext'
 export default function HomePostCard({_id, title, photo, description, author, hearts}){
     const [heart, setHeart] = useState(hearts.length)
     const [click, setClick] = useState(false)
+    const [click2, setClick2] = useState(false) // for the saved posts
     const { user }  = useContext(TokenContext)
     const { hrStyles } = Style()
     const { theme } = useContext(ThemeContext)
     useEffect(() =>{ 
-        if(hearts.includes(user)){ //if user already liked post click state sets to true
+        if(hearts.includes(user)){ // if user already liked post click state sets to true
             setClick(true)
         }
     }, [user, hearts])
@@ -24,7 +25,7 @@ export default function HomePostCard({_id, title, photo, description, author, he
             },
             credentials: 'include'
         }
-        const res = await fetch(`http://localhost:5000/heart/${_id}`, options)
+        const res = await fetch(`https://reme-server-2o9o.onrender.com/heart/${_id}`, options)
         const {hearts} = await res.json()
         setHeart(hearts.length)
         setClick(true)
@@ -39,7 +40,7 @@ export default function HomePostCard({_id, title, photo, description, author, he
         },
         credentials: 'include'
     }
-    const res = await fetch(`http://localhost:5000/unheart/${_id}`, options)
+    const res = await fetch(`https://reme-server-2o9o.onrender.com/unheart/${_id}`, options)
     const { hearts } = await res.json()
     setHeart(hearts.length)
     setClick(false)
@@ -58,9 +59,23 @@ const handleSave = async() =>{
             _id: _id
         })
     }
-    const res = await fetch('http://localhost:5000/savepost', options);
-    const ans = await res.json()
-    console.log(ans)
+    await fetch('https://reme-server-2o9o.onrender.com/savepost', options);
+}
+
+const handleUnSave = async() =>{
+    const options = {
+        method: 'POST',
+        headers: {
+             "Accept": "application/json",
+             "Content-Type": "application/json"
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+            _id: _id
+        })
+    }
+    await fetch('https://reme-server-2o9o.onrender.com/unsavepost', options);
+    setClick2(false)
 }
     
     return(
@@ -83,9 +98,16 @@ const handleSave = async() =>{
                 <p>{heart} {heart === 1 ? "heart" : "hearts" }</p>
                 </section>
                 <div>
-                <button onClick={() => handleSave(_id)}>
-                <svg xmlns="http://www.w3.org/2000/svg" height="36" viewBox="0 -960 960 960" width="36" style={hrStyles} fill={theme ? 'black' : 'white'}><path d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Zm80-122 200-86 200 86v-518H280v518Zm0-518h400-400Z"/></svg>
-                </button>
+                {click2 ? 
+                 <button onClick={() => handleUnSave(_id)}>
+                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="36" style={hrStyles} fill="black"><path d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Z"/></svg>
+                 </button>
+                 :
+                 <button onClick={() => handleSave(_id)}>
+                 <svg xmlns="http://www.w3.org/2000/svg" height="36" viewBox="0 -960 960 960" width="36" style={hrStyles} fill={theme ? 'black' : 'white'}><path d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Zm80-122 200-86 200 86v-518H280v518Zm0-518h400-400Z"/></svg>
+                 </button>
+                }
+               
                 </div>
                 </section>
 

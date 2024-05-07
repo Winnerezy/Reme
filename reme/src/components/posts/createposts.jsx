@@ -34,7 +34,7 @@ export default function CreatePosts(){
                 credentials: 'include',
                 body: formData
             }
-            const res = await fetch('http://localhost:5000/post', options)
+            const res = await fetch('https://reme-server-2o9o.onrender.com/post', options)
             if(!res.ok){
                 throw new Error('error found')
             }

@@ -76,7 +76,7 @@ export default function SignUpForm(){
             }
 
             try {
-                const res = await fetch('http://localhost:5000/sign-up', options);
+                const res = await fetch('https://reme-server-2o9o.onrender.com/sign-up', options);
                 if(res.ok){
                     setIsLoading(false)
                     navigate('/sign-in')

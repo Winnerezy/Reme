@@ -34,7 +34,7 @@ export default function HomePage(){
                     },
                     credentials: 'include'
                 }
-                const res = await fetch('http://localhost:5000/home', options)
+                const res = await fetch('https://reme-server-2o9o.onrender.com/home', options)
                 if(!res.ok){
                     throw new Error('error found')
                 }
