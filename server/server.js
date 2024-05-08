@@ -469,7 +469,7 @@ app.post('/savepost', VerifyToken, async(req, res)=> {
         const post = await Posts.findById({_id})
         const existing = await SavedPost.findOne({saved: post})
         if(existing){
-          return res.status(400).json({ message: 'Post already saved' })
+          return res.status(200).json({ message: 'Post saved' })
         }
         const savedPost = await SavedPost.create({author: req.username, saved: post});
         
