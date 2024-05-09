@@ -9,6 +9,8 @@ import Posts from "./schemas/postSchema.js";
 import dotenv from "dotenv";
 import VerifyToken from "./middleware/verifytoken.js";
 import SavedPost from "./schemas/savedpostsSchema.js";
+import { Server } from "socket.io"
+import { createServer } from "http"
 dotenv.config({ path: "./.env" });
 
 const app = express();
@@ -500,6 +502,78 @@ app.get('/savedposts', VerifyToken, async(req, res)=> {
     }
 })
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+// messaging implementation
+
+const httpServer = createServer(app)
+
+const io = new Server(httpServer, {
+  cors: {
+    origin: "http://localhost:5173"
+  }
+})
+
+let connectedUsers = {}
+
+io.on("connection", (socket)=> {
+  console.log("user connected", socket.id)
+  const user = socket.handshake.query.user
+  socket.username = user
+  connectedUsers[user] = socket
+ // if(user !== "undefined") connectedUsers[user] = socket.id;
+  io.emit("getOnlineUsers", Object.keys(connectedUsers))
+
+  socket.on("private message", (data) => {
+    console.log("Private message received:", data);
+
+    const senderUsername = data.sender
+    const senderSocket = connectedUsers[senderUsername] // the socket of the sender
+    const receiverUsername = data.receiver;
+    const receiverSocket = connectedUsers[receiverUsername]; //the socket of the receiver 
+
+    if(senderSocket){
+    senderSocket.emit("private message", 
+      {
+        message: data.message,
+        time: time()
+      }
+    )
+    console.log("sent")
+  } else {
+    console.log("not sent")
+  }
+
+
+    if (receiverSocket) {
+        receiverSocket.emit("private message", {
+            sender: user,
+            message: data.message,
+            time: time()
+        });
+
+        receiverSocket.emit("status", 
+          {
+            online: true
+          }
+        )
+        console.log("Private message sent successfully.");
+    } else {
+        console.log("Receiver is not online.");
+    }
 });
+
+  socket.on("disconnect", ()=> {
+    console.log("user disconnected", socket.id)
+    delete connectedUsers[user]
+  })
+})
+
+const time = () => {
+  const date = new Date()
+  const currentTime = date.toLocaleString()
+  return currentTime
+}
+
+httpServer.listen(PORT)
+// app.listen(PORT, () => {
+//   console.log(`Server running on port ${PORT}`);
+// });

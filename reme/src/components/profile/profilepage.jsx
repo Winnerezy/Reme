@@ -122,12 +122,18 @@ export default function Profile(){
                     (<button className="p-2 w-24 h-8 rounded-md text-sm shadow-sm font-medium" onClick={()=> navigate(`/${user}/edit`)} style={buttonStyles}><span style={textStyles}>Edit Profile</span></button>) 
                     :
                     (
+                        <section className="flex flex-row gap-4">
                         <div>
                             {follow ? 
                             <button className="p-2 w-18 h-8 rounded-md text-sm font-semibold shadow-sm" onClick={handleRemoveFriend} style={buttonStyles}><span style={textStyles}>Unfollow</span></button>
                         :
                             <button className="p-2 w-18 h-8 rounded-md text-sm font-semibold shadow-sm" onClick={handleAddFriend} style={buttonStyles}><span style={textStyles}>Follow</span></button>}
                         </div>
+
+                        <div>
+                            <button className="p-2 w-24 h-8 rounded-md text-sm shadow-sm font-medium" style={buttonStyles} onClick={()=> navigate(`/message/${userName}`)}><span style={textStyles}>Message</span></button>
+                        </div>
+                        </section>
                     )
                     }
                 </div>

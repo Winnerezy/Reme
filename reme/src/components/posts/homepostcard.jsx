@@ -60,11 +60,12 @@ const handleSave = async() =>{
         })
     }
     await fetch('https://reme-server-2o9o.onrender.com/savepost', options);
+    setClick2(true)
 }
 
 const handleUnSave = async() =>{
     const options = {
-        method: 'POST',
+        method: 'DELETE',
         headers: {
              "Accept": "application/json",
              "Content-Type": "application/json"
@@ -88,10 +89,13 @@ const handleUnSave = async() =>{
                 <section className='w-full flex flex-row items-center relative'>
                 <section className='w-full flex flex-col items-start justify-center'>
                 <div className='flex items-center justify-center'>
-                {click ? <button className='w-12 h-12 bg-transparent' onClick={handleUnHeart}>
+                {click ? 
+                <button className='w-12 h-12 bg-transparent' onClick={handleUnHeart}>
                 <svg xmlns="http://www.w3.org/2000/svg" height="36" viewBox="0 -960 960 960" width="36" fill='red'><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg>
-                </button> : <button className='w-12 h-12 bg-transparent' onClick={handleHeart}>
-                <svg xmlns="http://www.w3.org/2000/svg" height="36" viewBox="0 -960 960 960" width="36" fill='gray'><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Zm0-108q96-86 158-147.5t98-107q36-45.5 50-81t14-70.5q0-60-40-100t-100-40q-47 0-87 26.5T518-680h-76q-15-41-55-67.5T300-774q-60 0-100 40t-40 100q0 35 14 70.5t50 81q36 45.5 98 107T480-228Zm0-273Z"/></svg>
+                </button> 
+                :
+                <button className='w-12 h-12 bg-transparent' onClick={handleHeart}>
+                <svg xmlns="http://www.w3.org/2000/svg" height="36" viewBox="0 -960 960 960" width="36" style={hrStyles} fill={theme ? 'black' : 'white'}><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Zm0-108q96-86 158-147.5t98-107q36-45.5 50-81t14-70.5q0-60-40-100t-100-40q-47 0-87 26.5T518-680h-76q-15-41-55-67.5T300-774q-60 0-100 40t-40 100q0 35 14 70.5t50 81q36 45.5 98 107T480-228Zm0-273Z"/></svg>
                 </button>}
                 </div>
                 
@@ -100,7 +104,7 @@ const handleUnSave = async() =>{
                 <div>
                 {click2 ? 
                  <button onClick={() => handleUnSave(_id)}>
-                 jhgydvcjhsk
+                 <svg xmlns="http://www.w3.org/2000/svg" height="36" viewBox="0 -960 960 960" width="36" style={hrStyles} fill={theme ? 'black' : 'white'}><path d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Z"/></svg>
                  </button>
                  :
                  <button onClick={() => handleSave(_id)}>

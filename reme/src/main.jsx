@@ -16,6 +16,7 @@ import EditPost from './components/posts/editpost';
 import ProfileCard from './components/profile/profilecard';
 import SavedPosts from './components/savedposts/savedposts';
 import { ThemeProvider } from './components/miscellaneous/themecontext';
+import Message from './components/message/message';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -30,6 +31,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Route path=':userName/edit' element={<EditProfile/>}/>
       <Route path='createpost' element={<CreatePosts/>}/>
       <Route path='editPost/:id' element={<EditPost/>}/>
+      <Route path='message/:userName' element={<Message/>}/>
       <Route path='*' element={<NoPage/>}/>
       <Route path='profile/:userName/followers' element={<ProfileCard/>}/>
       <Route path='savedposts' element={<SavedPosts/>}/>
