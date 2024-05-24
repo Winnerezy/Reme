@@ -12,15 +12,15 @@ export default function HomePage(){
     const navigate = useNavigate()
 
 
-    useEffect(() => {
-        const token = Cookies.get('token');
-        if (!token) {
-            navigate('/sign-up');
-        } else {
-            localStorage.setItem('token', token);
-            setLoggedIn(true);
-        }
-    }, [navigate]);
+    // useEffect(() => {
+    //     const token = Cookies.get('token');
+    //     if (!token) {
+    //         navigate('/sign-up');
+    //     } else {
+    //         localStorage.setItem('token', token);
+    //         setLoggedIn(true);
+    //     }
+    // }, [navigate]);
 
 
     const FetchHome = () => { useEffect( ()=> {
