@@ -24,7 +24,7 @@ connect();
 app.use(
   cors({
     credentials: true,
-    origin: "https://reme-55v8gzt64-winners-projects-894c8afe.vercel.app",
+    origin: "https://reme-azure.vercel.app",
   })
 );
 app.use(express.json());
